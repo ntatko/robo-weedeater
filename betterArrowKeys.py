@@ -1,7 +1,7 @@
-from directionTrail import *
+from mowerClass import *
 import keyboard
 
-
+mower = Mower()
        # inkey = _Getch()
         #while(1):
 	#k=inkey()
@@ -19,7 +19,7 @@ while 1:
                 x1 = 1
 	elif keyboard.is_pressed('esc'):
 		exit()
-	drive(0, y1, x1, 0, motor1, motor2, motor3)
+	mower.drive(0, y1, x1)
 		#k=inkey()
 #drive(0,0,0,0,motor1,motor2,motor3
 	time.sleep(0.01)
