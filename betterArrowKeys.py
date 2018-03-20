@@ -2,6 +2,7 @@ from mowerClass import *
 import keyboard
 
 mower = Mower()
+atexit.register(mower.turnOffMotors())
        # inkey = _Getch()
         #while(1):
 	#k=inkey()
