@@ -3,7 +3,7 @@ import time
 import mowerClass
 
 controller = xbox.Controller()
-mower = Mower()
+mower = mowerClass.Mower()
 
 while 1:
 	print(str(controller.get_leftX()) + ", " + str(controller.get_leftY()) + ", " + str(controller.get_rightX()))
