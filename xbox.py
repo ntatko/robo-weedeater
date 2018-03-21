@@ -19,6 +19,7 @@
 
 import pygame
 
+os.putenv('SDL_VIDEODRIVER', 'fbcon')
 pygame.display.init()
 pygame.joystick.init()
 pygame.joystick.Joystick(0).init()
