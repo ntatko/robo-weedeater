@@ -8,25 +8,34 @@ class Controller:
         pygame.joystick.init()
         pygame.joystick.Joystick(0).init()
 
-        # Prints the joystick's name
-        JoyName = pygame.joystick.Joystick(0).get_name()
-        print "Name of the joystick:"
-        print JoyName
-        # Gets the number of axes
-        JoyAx = pygame.joystick.Joystick(0).get_numaxes()
-        print "Number of axis:"
-        print JoyAx
-
-        self._controller = pygame.joystick.Joystick(0)
+        self._joysticks = pygame.joystick.Joystick(0)
 
     def get_leftX(self):
         pygame.event.pump()
-        return self._controller.get_axis(0)
+        return self._joysticks.get_axis(0)
 
     def get_leftY(self):
         pygame.event.pump()
-        return -self._controller.get_axis(1)
+        return -self._joysticks.get_axis(1)
 
     def get_rightX(self):
         pygame.event.pump()
-        return -self._controller.get_axis(3)
+        return -self._joysticks.get_axis(3)
+
+    def get_A(self):
+        if self._joysticks.get_button(0):
+            return 1
+        else:
+            return -0
+
+    def get_B(self):
+        if self._joysticks.get_button(1):
+            return 1
+        else:
+            return -0
+
+    def get_X(self):
+        if self._joysticks.get_button(2):
+            return 1
+        else:
+            return -0

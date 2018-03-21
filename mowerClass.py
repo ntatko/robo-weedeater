@@ -31,6 +31,12 @@ class Mower:
     	W2 = ((-1/2*x1 + y1*(3**0.5)/2)*self._driveConstant + x2*self._rotationConstant)*255
     	W3 = (x1*self._driveConstant*1.75 + x2*self._rotationConstant)*255
 
+        if W1 > 255:
+            W1 = 255
+        if W2 > 255:
+            W2 = 255
+
+
         print("[" + str(W1) + ", " + str(W2) + ", " + str(W3) + "]") #debug
 
     	if W1 > 0:
@@ -67,3 +73,11 @@ class Mower:
     def spinCutter(self):
         #this code will start the cutter
         print("Motor has started") #debug
+
+    def fast(self):
+        self._driveConstant = 1
+        self._rotationConstant = 1
+
+    def slow(self):
+        self._driveConstant = 0.5
+        self._rotationConstant = 0.25
