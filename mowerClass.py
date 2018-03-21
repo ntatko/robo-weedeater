@@ -36,9 +36,6 @@ class Mower:
         if W2 > 255:
             W2 = 255
 
-
-        print("[" + str(W1) + ", " + str(W2) + ", " + str(W3) + "]") #debug
-
     	if W1 > 0:
     		self._m1.run(Adafruit_MotorHAT.FORWARD)
     	elif W1 < 0:
