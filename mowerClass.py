@@ -16,8 +16,8 @@ class Mower:
         self._m2.setSpeed(0)
         self._m3.setSpeed(0)
 
-        self._driveConstant = 0.85
-        self._rotationConstant = 1 - self._driveConstant + 0.2
+        self._driveConstant = 1
+        self._rotationConstant = 1
 
     def turnOffMotors(self):
 
