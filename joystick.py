@@ -1,8 +1,8 @@
 import xbox
 import time
 
-controller = xbox.Joystick()
+controller = xbox.Controller()
 
 while 1:
-	print(str(controller.leftX()) + ", " + str(controller.leftY()) + ", " + str(controller.rightX()))
+	print(str(controller.get_leftX()) + ", " + str(controller.get_leftY()) + ", " + str(controller.get_rightX()))
 	time.sleep(1)
