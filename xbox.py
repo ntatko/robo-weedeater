@@ -24,18 +24,21 @@ class Controller:
 
     def get_A(self):
         if self._joysticks.get_button(0):
+            print("got a")
             return 1
         else:
             return -0
 
     def get_B(self):
         if self._joysticks.get_button(1):
+            print("got b")
             return 1
         else:
             return -0
 
     def get_X(self):
         if self._joysticks.get_button(2):
+            print("got x")
             return 1
         else:
             return -0
