@@ -29,4 +29,4 @@ class Controller:
 
     def get_rightX(self):
         pygame.event.pump()
-        return self._controller.get_axis(2)
+        return self._controller.get_axis(4)
