@@ -29,7 +29,7 @@ class Mower:
 
     	W1 = ((-1/2*x1 - y1*(3**0.5)/2)*self._driveConstant + x2*self._rotationConstant)*255
     	W2 = ((-1/2*x1 + y1*(3**0.5)/2)*self._driveConstant + x2*self._rotationConstant)*255
-    	W3 = (x1*self._driveConstant + x2*self._rotationConstant)*255
+    	W3 = (x1*self._driveConstant*2 + x2*self._rotationConstant)*255
 
         print("[" + str(W1) + ", " + str(W2) + ", " + str(W3) + "]") #debug
 
