@@ -18,6 +18,7 @@
 
 
 import pygame
+import os
 
 os.putenv('SDL_VIDEODRIVER', 'fbcon')
 pygame.display.init()
