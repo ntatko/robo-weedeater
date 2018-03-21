@@ -25,7 +25,7 @@ class Controller:
 
     def get_leftY(self):
         pygame.event.pump()
-        return self._controller.get_axis(1)
+        return -self._controller.get_axis(1)
 
     def get_rightX(self):
         pygame.event.pump()
