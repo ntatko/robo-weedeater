@@ -1,4 +1,4 @@
-from directionTrail import *
+from mowerClass import *
 import sys,tty,termios
 class _Getch:
     def __call__(self):
@@ -11,28 +11,28 @@ class _Getch:
                 termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
             return ch
 
-def get():
+def get(robot):
         inkey = _Getch()
         #while(1):
 	k=inkey()
 	while k:
 		#drive(0,0,0,0,motor1,motor2,motor3) 	#break
-		x1 = y1 = 0
+		x1 = x2 = y1 = 0
 		if k=='\x1b[A':
         	        y1 = 1
        		elif k=='\x1b[B':
                 	y1 = -1
         	elif k=='\x1b[C':
-                	x1 = -1
+                	x2 = -1
         	elif k=='\x1b[D':
-                	x1 = 1
+                	x2 = 1
 		else:
+			robot.drive()
 			exit()
-		drive(0, y1, x1, 0, motor1, motor2, motor3)
+		robot.drive(x1, y1, x2)
 		k=inkey()
-	drive(0,0,0,0,motor1,motor2,motor3)
 
-
+mower = Mower()
 while 1:
-	get()
+	get(mower)
 	time.sleep(0.01)

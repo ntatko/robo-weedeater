@@ -17,10 +17,8 @@ class Mower:
         self._m2.setSpeed(0)
         self._m3.setSpeed(0)
 
-        self._driveConstant = 0.75
-        self._rotationConstant = 1 - self._driveConstant
-
-        atexit.register(self.turnOffMotors())
+        self._driveConstant = 0.85
+        self._rotationConstant = 1 - self._driveConstant + 0.2
 
     def turnOffMotors(self):
 
@@ -34,7 +32,7 @@ class Mower:
     	W2 = ((-1/2*x1 + y1*(3**0.5)/2)*self._driveConstant + x2*self._rotationConstant)*255
     	W3 = (x1*self._driveConstant + x2*self._rotationConstant)*255
 
-        print("[" + W1 + ", " + W2 + ", " + W3 + "]") #debug
+        print("[" + str(W1) + ", " + str(W2) + ", " + str(W3) + "]") #debug
 
     	if W1 > 0:
     		self._m1.run(Adafruit_MotorHAT.FORWARD)

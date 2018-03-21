@@ -4,7 +4,6 @@ import keyboard
 mower = Mower()
 atexit.register(mower.turnOffMotors())
 
-keyboard.start_recording()
 while 1:
 	x1 = y1 = 0
 	if keyboard.KeyboardEvent: #maybe?
