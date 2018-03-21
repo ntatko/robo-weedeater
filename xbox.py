@@ -20,10 +20,13 @@ class Controller:
         self._controller = pygame.joystick.Joystick(0)
 
     def get_leftX(self):
+        pygame.event.pump()
         return self._controller.get_axis(0)
 
     def get_leftY(self):
+        pygame.event.pump()
         return self._controller.get_axis(1)
 
     def get_rightX(self):
+        pygame.event.pump()
         return self._controller.get_axis(2)
