@@ -13,7 +13,7 @@ while 1:
 	if controller.get_start() and mower.getCutter():
 		mower.spinCutter()
 	elif controller.get_start() and not mower.getCutter():
-		motor.killCutter()
+		mower.killCutter()
 	controller.get_X()
 	mower.drive(controller.get_leftX(), controller.get_leftY(), controller.get_rightX())
 	time.sleep(0.01)
