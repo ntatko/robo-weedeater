@@ -5,7 +5,7 @@
 
 from motor import motor
 
-mymotor = motor('m1', 17, simulation=False)
+mymotor = motor('m1', 18, simulation=False)
 #where 17 is  GPIO17 = pin 11
 
 print('***Disconnect ESC power')
@@ -25,7 +25,7 @@ mymotor.setW(0)
 print('***Wait N beep for battery cell')
 print('***Wait beeeeeep for ready')
 print('***then press ENTER')
-res = raw_74input()
+res = raw_input()
 print ('increase > a | decrease > z | save Wh > n | set Wh > h|quit > 9')
 
 cycling = True
