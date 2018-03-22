@@ -71,10 +71,10 @@ class Mower:
         #this code will start the cutter
         print("Motor has started") #debug
 
-    def fast(self):
+    def driveFast(self):
         self._driveConstant = 1
         self._rotationConstant = 1
 
-    def slow(self):
+    def driveSlow(self):
         self._driveConstant = 0.5
         self._rotationConstant = 0.25
