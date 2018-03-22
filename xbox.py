@@ -47,7 +47,7 @@ class Controller:
             return -0
 
     def get_start(self):
-        if self._joysticks.get_botton(7):
+        if self._joysticks.get_button(7):
             return 1
         else:
             return -0
