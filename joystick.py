@@ -10,9 +10,9 @@ while 1:
 		mower.driveSlow()
 	if controller.get_B():
 		mower.driveFast()
-	if controller.get_start() and controller.getCutter():
+	if controller.get_start() and mower.getCutter():
 		mower.spinCutter()
-	elif controller.get_start() and not controller.getCutter():
+	elif controller.get_start() and not mower.getCutter():
 		motor.killCutter()
 	controller.get_X()
 	mower.drive(controller.get_leftX(), controller.get_leftY(), controller.get_rightX())
