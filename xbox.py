@@ -68,3 +68,9 @@ class Controller:
             return 1
         else:
             return -0
+
+    def listen_for_buttons(self):
+        for i in range(8):
+            if self._joysticks.get_button(i):
+                print(i)
+                
