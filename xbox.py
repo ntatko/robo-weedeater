@@ -36,35 +36,36 @@ class Controller:
 
     def get_X(self):
         if self._joysticks.get_button(2):
-            print("got x")
             return 1
         else:
             return -0
 
     def get_Y(self):
         if self._joysticks.get_button(3):
-            print("got y")
             return 1
         else:
             return -0
 
     def get_start(self):
-        if self._joysticks.get_botton(4):
-            print("got start")
+        if self._joysticks.get_botton(7):
             return 1
         else:
             return -0
 
     def get_back(self):
-        if self._joysticks.get_button(5):
-            print("got back")
+        if self._joysticks.get_button(6):
             return 1
         else:
             return -0
 
-    def get_menu(self):
-        if self._joysticks.get_button(6):
-            print("got menu")
+    def get_RB(self):
+        if self._joysticks.get_button(5):
+            return 1
+        else:
+            return -0
+
+    def get_LB(self):
+        if self._joysticks.get_button(4):
             return 1
         else:
             return -0
@@ -73,4 +74,3 @@ class Controller:
         for i in range(8):
             if self._joysticks.get_button(i):
                 print(i)
-                

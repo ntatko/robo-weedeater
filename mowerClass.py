@@ -19,6 +19,8 @@ class Mower:
         self._driveConstant = 1
         self._rotationConstant = 1
 
+        self._cutter = 0
+
     def turnOffMotors(self):
 
         self._m1.run(Adafruit_MotorHAT.RELEASE)
@@ -68,10 +70,15 @@ class Mower:
     def killCutter(self):
         #this code would stop the cutter from spinning
         print("Motor is killed") #debug
+        self._cutter = 0
 
     def spinCutter(self):
         #this code will start the cutter
         print("Motor has started") #debug
+        self._cutter = 1
+
+    def getCutter(self):
+        return self._cutter
 
     def driveFast(self):
         self._driveConstant = 1
