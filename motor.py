@@ -15,11 +15,20 @@
 #powered >simulation
 #add powered = the PWM signal is out
 
+#2014.02.20
+#simplified code removing unused functions
+#add dma_channel=1, subcycle_time_us=5000, pulse_incr_us=1 for better accuracy
+
+#2014.06.20
+#switch from pwm.setservo()  to PWM.add_channel_pulse() to avoid unstable
+# motor speed
+
+from time import sleep
 
 class motor(object):
-    """Manages the currect Angular rotation
+    """Manages the currect Angular rotation W
     Implements the IO interface using the RPIO lib
-    __init_(self, name, pin, kv=1000, RPMMin=1, RPMMax=100, debug=True, simulation=True):
+    __init_(self, name, pin, kv=1000, WMin=1, WMax=100, debug=True, simulation=True):
     More info on RPIO in http://pythonhosted.org/RPIO/index.html"""
 
 
@@ -27,37 +36,26 @@ class motor(object):
         self.name = name
         self.powered = False
         self.simulation = simulation
-        self.__pin = pin
-        self.__kv = kv
+        self.pin = pin
+        self.debug=debug
+        self.__WMin = 0
+        self.__WMax = 100
         self.setWLimits(WMin, WMax)
-        self.setDebug(debug)
 
         self.__W = self.__WMin
         self.__Wh = 10
 
+
+        self.kv = kv
+        self.mass=0.050 #[kg]
+
         try:
             from RPIO import PWM
-            self.__IO = PWM.Servo()
+            #here just check that library is available
+            self.PWM=PWM
         except ImportError:
             self.simulation = True
 
-    def setDebug(self, debug):
-        self.__debug = debug
-        #if self.__debug:
-            #self.__logger.setLevel(logging.DEBUG)
-        #else:
-            #self.__logger.setLevel(logging.WARNING)
-
-    def getDebug(self):
-        return self.__debug
-
-    def setPin(self, pin):
-        "set the pin for each motor"
-        self.__pin = pin
-
-    def setKv(self, kv):
-        "set the kv for each motor"
-        self.__kv = kv
 
     def setWLimits(self, WMin, WMax):
         "set the pin for each motor"
@@ -86,11 +84,15 @@ class motor(object):
         if not self.simulation:
             try:
                 from RPIO import PWM
-                self.__IO = PWM.Servo()
+                if not self.PWM.is_setup():
+                    self.PWM.setup(pulse_incr_us=1)
+                    self.PWM.set_loglevel(PWM.LOG_LEVEL_ERRORS)
+                    self.PWM.init_channel(1,3000)
+                #self.servo = PWM.Servo(dma_channel=1, subcycle_time_us=5000,pulse_incr_us=1)
                 self.powered = True
-                #TODO Decide How to manage the WMax < 100
-                #to keep anyhow the throttle range 0-100
+
             except ImportError:
+                print ('Failed to init RPIO...')
                 self.simulation = True
                 self.powered = False
 
@@ -98,21 +100,11 @@ class motor(object):
         "Stop PWM signal"
 
         self.setW(0)
+        sleep(0.1)
         if self.powered:
-            self.__IO.stop_servo(self.__pin)
+            self.PWM.add_channel_pulse(1,self.pin,0,1000)
+            #self.servo.stop_servo(self.pin)
             self.powered = False
-
-    def increaseW(self, step=1):
-        "increases W% for the motor"
-
-        self.__W = self.__W + step
-        self.setW(self.__W)
-
-    def decreaseW(self, step=1):
-        "decreases W% for the motor"
-
-        self.__W = self.__W - step
-        self.setW(self.__W)
 
     def getW(self):
         "retuns current W%"
@@ -122,12 +114,14 @@ class motor(object):
         "Checks W% is between limits than sets it"
 
         PW = 0
-        self.__W = W
+        self.__W = round(W,1)
+        #W is rounded to the first decimal, since PWM has pulse increment=1us
         if self.__W < self.__WMin:
             self.__W = self.__WMin
         if self.__W > self.__WMax:
             self.__W = self.__WMax
-        PW = (1000 + (self.__W) * 10)
-        # Set servo to xxx us
+        PW = int(1000 + (self.__W) * 10)
+        # Set servo to xxx us ,nanosec
         if self.powered:
-            self.__IO.set_servo(self.__pin, PW)
+            #self.servo.set_servo(self.pin, PW)
+            self.PWM.add_channel_pulse(1,self.pin,0,PW)
