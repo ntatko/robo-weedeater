@@ -35,6 +35,8 @@ class Mower:
             W1 = 255
         if W2 > 255:
             W2 = 255
+        if W3 > 255:
+            W3 = 255
 
     	if W1 > 0:
     		self._m1.run(Adafruit_MotorHAT.FORWARD)
@@ -76,5 +78,5 @@ class Mower:
         self._rotationConstant = 1
 
     def driveSlow(self):
-        self._driveConstant = 0.5
-        self._rotationConstant = 0.25
+        self._driveConstant = 0.65
+        self._rotationConstant = 0.4
