@@ -6,7 +6,7 @@
 #	a video environment. Works with raspbery pi, raspberry
 #	pi zero, raspberry pi zero w, and most linux computers.
 #
-#	PLEASE NOTE: administrator privelages are needed to 
+#	PLEASE_NOTE: administrator privelages are needed to
 #	run this module, so use
 #		sudo python myfile.py
 #	to run the file which contains
@@ -25,16 +25,19 @@
 
 import pygame
 import os
+os.putenv('SDL_VIDEODRIVER', 'fbcon') #create a virtual graphics inviromment, which
+                                          #pygame needs to work
+pygame.display.init() #init the pygame module
+pygame.joystick.init() #inid the joystick sub_module of pygame
+
+def get_numControllers():
+    return pygame.joystick.get_count()
 
 class Controller:
 
     def __init__(self, joyNum = 0):
-	os.putenv('SDL_VIDEODRIVER', 'fbcon') #create a virtual graphics inviromment, which 
-                                              #pygame needs to work
-	pygame.display.init() #init the pygame module
-	pygame.joystick.init() #inid the joystick sub_module of pygame
-	pygame.joystick.Joystick(joyNum).init() #init the controller
-	self._joysticks = pygame.joystick.Joystick(joyNum)
+        pygame.joystick.Joystick(joyNum).init() #init the controller
+        self._joysticks = pygame.joystick.Joystick(joyNum)
 
     def get_leftX(self):
         pygame.event.pump()
@@ -49,82 +52,89 @@ class Controller:
         return -self._joysticks.get_axis(3)
 
     def get_rightY(self):
-	pygame.event.pump()
-	return self._joysticks.get_axis(4)
+        pygame.event.pump()
+        return self._joysticks.get_axis(4)
 
     def get_LT(self):
-	pygame.event.pump()
-	return self._joysticks.get_axis(2)/2 + 1
+	    pygame.event.pump()
+        return self._joysticks.get_axis(2)/2 + 1
 
     def get_RT(self):
-	pygame.event.pump()
-	return self._joysticks.get_axis(5)/2 + 1
+	    pygame.event.pump()
+	    return self._joysticks.get_axis(5)/2 + 1
 
     def get_A(self):
-	pygame.event.pump()
+	    pygame.event.pump()
         if self._joysticks.get_button(0):
             return 1
         else:
             return -0
 
     def get_B(self):
-	pygame.event.pump()
+	    pygame.event.pump()
         if self._joysticks.get_button(1):
             return 1
         else:
             return -0
 
     def get_X(self):
-	pygame.event.pump()
+	    pygame.event.pump()
         if self._joysticks.get_button(2):
             return 1
         else:
             return -0
 
     def get_Y(self):
-	pygame.event.pump()
+	    pygame.event.pump()
         if self._joysticks.get_button(3):
             return 1
         else:
             return -0
 
     def get_start(self):
-	pygame.event.pump()
+	    pygame.event.pump()
         if self._joysticks.get_button(7):
             return 1
         else:
             return -0
 
     def get_back(self):
-	pygame.event.pump()
+	    pygame.event.pump()
         if self._joysticks.get_button(6):
             return 1
         else:
             return -0
 
     def get_RB(self):
-	pygame.event.pump()
+	    pygame.event.pump()
         if self._joysticks.get_button(5):
             return 1
         else:
             return -0
 
     def get_LB(self):
-	pygame.event.pump()
+	    pygame.event.pump()
         if self._joysticks.get_button(4):
             return 1
         else:
             return -0
 
     def listen_for_buttons(self):
-	pygame.event.pump()
+	    pygame.event.pump()
         for i in range(8):
             if self._joysticks.get_button(i):
                 print(i)
 
     def listen_for_joysticks(self):
-	pygame.event.pump()
-	string = ''
-	for i in range(self._joysticks.get_numaxes()):
-		string += str(i) + ": " + str(self._joysticks.get_axis(i)) + ", "
-	print(string)
+        pygame.event.pump()
+        string = ''
+        for i in range(self._joysticks.get_numaxes()):
+        	string += str(i) + ": " + str(self._joysticks.get_axis(i)) + ", "
+        print(string)
+
+    def listen_for_hats(self):
+        pygame.event.punp()
+        string = ''
+        for i in range(self._joysticks.get_numhats()):
+            string += str(i) + ": " + str(self._joysticks.get_hat(i)) + ", "
+        print(string)
