@@ -52,6 +52,14 @@ class Controller:
 	pygame.event.pump()
 	return self._joysticks.get_axis(4)
 
+    def get_LT(self):
+	pygame.event.pump()
+	return self._joysticks.get_axis(2)/2 + 1
+
+    def get_RT(self):
+	pygame.event.pump()
+	return self._joysticks.get_axis(5)/2 + 1
+
     def get_A(self):
 	pygame.event.pump()
         if self._joysticks.get_button(0):
@@ -113,3 +121,10 @@ class Controller:
         for i in range(8):
             if self._joysticks.get_button(i):
                 print(i)
+
+    def listen_for_joysticks(self):
+	pygame.event.pump()
+	string = ''
+	for i in range(self._joysticks.get_numaxes()):
+		string += str(i) + ": " + str(self._joysticks.get_axis(i)) + ", "
+	print(string)
