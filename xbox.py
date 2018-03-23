@@ -56,71 +56,71 @@ class Controller:
         return self._joysticks.get_axis(4)
 
     def get_LT(self):
-	    pygame.event.pump()
+	pygame.event.pump()
         return self._joysticks.get_axis(2)/2 + 1
 
     def get_RT(self):
-	    pygame.event.pump()
-	    return self._joysticks.get_axis(5)/2 + 1
+	pygame.event.pump()
+	return self._joysticks.get_axis(5)/2 + 1
 
     def get_A(self):
-	    pygame.event.pump()
+	pygame.event.pump()
         if self._joysticks.get_button(0):
             return 1
         else:
             return -0
 
     def get_B(self):
-	    pygame.event.pump()
+	pygame.event.pump()
         if self._joysticks.get_button(1):
             return 1
         else:
             return -0
 
     def get_X(self):
-	    pygame.event.pump()
+	pygame.event.pump()
         if self._joysticks.get_button(2):
             return 1
         else:
             return -0
 
     def get_Y(self):
-	    pygame.event.pump()
+	pygame.event.pump()
         if self._joysticks.get_button(3):
             return 1
         else:
             return -0
 
     def get_start(self):
-	    pygame.event.pump()
+	pygame.event.pump()
         if self._joysticks.get_button(7):
             return 1
         else:
             return -0
 
     def get_back(self):
-	    pygame.event.pump()
+	pygame.event.pump()
         if self._joysticks.get_button(6):
             return 1
         else:
             return -0
 
     def get_RB(self):
-	    pygame.event.pump()
+	pygame.event.pump()
         if self._joysticks.get_button(5):
             return 1
         else:
             return -0
 
     def get_LB(self):
-	    pygame.event.pump()
+	pygame.event.pump()
         if self._joysticks.get_button(4):
             return 1
         else:
             return -0
 
     def listen_for_buttons(self):
-	    pygame.event.pump()
+	pygame.event.pump()
         for i in range(8):
             if self._joysticks.get_button(i):
                 print(i)
@@ -133,7 +133,7 @@ class Controller:
         print(string)
 
     def listen_for_hats(self):
-        pygame.event.punp()
+        pygame.event.pump()
         string = ''
         for i in range(self._joysticks.get_numhats()):
             string += str(i) + ": " + str(self._joysticks.get_hat(i)) + ", "
