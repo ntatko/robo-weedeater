@@ -3,7 +3,7 @@ from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor
 
 import time
 
-class Mower:
+class Kiwi_Bot:
 
     def __init__(self):
 
@@ -19,7 +19,6 @@ class Mower:
         self._driveConstant = 1
         self._rotationConstant = 1
 
-        self._cutter = 0
 
     def turnOffMotors(self):
 
@@ -35,10 +34,16 @@ class Mower:
 
         if W1 > 255:
             W1 = 255
+        elif W1 < -255:
+            W1 = -255
         if W2 > 255:
             W2 = 255
+        elif W2 < -255:
+            W2= -255
         if W3 > 255:
             W3 = 255
+        elif W3 < -255:
+            W3 = -255
 
     	if W1 > 0:
     		self._m1.run(Adafruit_MotorHAT.FORWARD)
@@ -67,6 +72,21 @@ class Mower:
 
     	time.sleep(0.01)
 
+    def driveFast(self):
+        self._driveConstant = 1
+        self._rotationConstant = 1
+
+    def driveSlow(self):
+        self._driveConstant = 0.65
+        self._rotationConstant = 0.4
+
+
+class Mower(Kiwi_Bot):
+
+    def __init__(self):
+        Kiwi_Bot.__init__(self)
+        self._cutter = 0
+
     def killCutter(self):
         #this code would stop the cutter from spinning
         print("Motor is killed") #debug
@@ -79,11 +99,3 @@ class Mower:
 
     def getCutter(self):
         return self._cutter
-
-    def driveFast(self):
-        self._driveConstant = 1
-        self._rotationConstant = 1
-
-    def driveSlow(self):
-        self._driveConstant = 0.65
-        self._rotationConstant = 0.4
