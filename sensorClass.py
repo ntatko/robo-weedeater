@@ -34,17 +34,18 @@ class Sensors:
         except:
             traceback.print_exc()
 
-    def get_compass(self):
+    #def get_compass(self):
 
     def get_accelerometer(self):
         self._thisAccelerometer = [self._data[2], self._data[3], self._data[4]]
         return self._thisAccelerometer
 
-    def get_gps(self):
+    #def get_gps(self):
 
-    def get_gyro(self):
+    #def get_gyro(self):
 
-    def get_changeCompass(self):
+    #def get_changeCompass(self):
+
 
     def get_changeAccelerometer(self):
         self._lastAccelerometer = self._thisAccelerometer
