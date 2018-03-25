@@ -39,12 +39,13 @@ class Sensors:
                      self._thisAccelerometer], 4:[self._lastGyro, self._thisGyro],
                      5:[self._lastCompass, self._thisCompass]}
 
-            for key, values in ports.items():
-                if key in self._data:
-                    values[0] = values[1]
-                    values[1] = [self._data[key + 1], self._data[key + 2], self._data[key + 3]]
-                    if key == 5:
-                        self._originCompass = values[1]
+            while self._originCompass == []:
+                for key, values in ports.items():
+                    if key in self._data:
+                        values[0] = values[1]
+                        values[1] = [self._data[key + 1], self._data[key + 2], self._data[key + 3]]
+                        if key == 5:
+                            self._originCompass = values[1]
 
         except (KeyboardInterrupt, SystemExit):
             raise
