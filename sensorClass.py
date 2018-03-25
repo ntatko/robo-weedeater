@@ -50,3 +50,6 @@ class Sensors:
         self._lastAccelerometer = self._thisAccelerometer
         self._thisAccelerometer = [self._data[2], self._data[3], self._data[4]]
         return [self._lastAccelerometer[0]-self._thisAccelerometer[0], self._lastAccelerometer[1]-self._thisAccelerometer[1], self._lastAccelerometer[2]-self._thisAccelerometer[2]]
+
+    def printStream(self):
+        print str(self._data)
