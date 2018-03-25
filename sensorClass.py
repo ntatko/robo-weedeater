@@ -28,7 +28,7 @@ class Sensors:
 
     def refreshData(self):
         try:
-            self._message, self._address = s.recvfrom(8192)
+            self._message, self._address = self._s.recvfrom(8192)
             self._data = self._message.split( "," )
         except (KeyboardInterrupt, SystemExit):
             raise
