@@ -94,8 +94,17 @@ class Sensors:
                 self._originCompass[1]**2 + self._originCompass[2]**2)**0.5) * (self._thisCompass[0]**2 +
                 self._thisCompass[1]**2 + self._thisCompass[2]**2)**0.5))
 
-    def set_compassHeading(self):
+    def set_compassHeading(self, heading):
+        self._heading = heading
+        self._headingMode = 1
 
+    def get_degFromHeading(self, heading):
+        return self._heading - heading
+
+    def end_compassHeading(self):
+        if self._headingMode == 1:
+            self._heading = 0
+            self._headingMode = 0
 
     def printStream(self):
         print str(self._data)
