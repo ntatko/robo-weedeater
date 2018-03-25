@@ -1,11 +1,11 @@
 import xbox
 import time
 import mowerClass
-import sensorClass
+#import sensorClass
 
 controller = xbox.Controller()
 mower = mowerClass.Mower()
-sensors =  sensorClass.Sensors()
+#sensors =  sensorClass.Sensors()
 
 while 1:
 	if controller.get_A():
