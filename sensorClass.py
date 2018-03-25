@@ -41,7 +41,7 @@ class Sensors:
 
             while self._originCompass == []:
                 for key, values in ports.items():
-                    if key in self._data:
+                    if key in int(self._data):
                         print("Getting " + str(key) + " from the list")
                         values[0] = values[1]
                         values[1] = [self._data[key + 1], self._data[key + 2], self._data[key + 3]]
