@@ -6,8 +6,7 @@ from sys import stderr
 class Sensors:
 
     def __init__(self):
-        self._ip = ipAddress
-
+        
         self._thisCompass = 0
         self._thisAccelerometer = []
         self._thisGPS = []
