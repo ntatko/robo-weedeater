@@ -89,6 +89,8 @@ class Sensors:
         return [self._lastAccelerometer[0]-self._thisAccelerometer[0], self._lastAccelerometer[1]-self._thisAccelerometer[1], self._lastAccelerometer[2]-self._thisAccelerometer[2]]
 
     def get_compassHeading(self):
+        while self._originCompass == [] or self._thisCompass == []
+            self.refreshData()
         return arcsin((self._originCompass[0]*self._thisCompass[0] + self._originCompass[1]*self._thisCompass[1] +
                 self._originCompass[2]*self._thisCompass[2])/(((self._originCompass[0]**2 +
                 self._originCompass[1]**2 + self._originCompass[2]**2)**0.5) * (self._thisCompass[0]**2 +
