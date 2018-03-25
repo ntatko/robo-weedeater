@@ -18,8 +18,5 @@ while 1:
 	elif controller.get_start() and mower.getCutter() == 1:
 		time.sleep(0.2)
 		mower.killCutter()
-	print("about to refresh data") #debug
-	sensors.refreshData()
-	print(str(sensors.get_compassHeading())) #debug
 	mower.drive(controller.get_leftX(), controller.get_leftY(), controller.get_rightX())
 	time.sleep(0.01)
