@@ -108,7 +108,12 @@ class Mower(Kiwi_Bot):
 
     def changeCutterSpeed(self, number):
         self._cutterSpeed += number
-        self._m4.setSpeed(self._cutterSpeed)
+        if self._cutterSpeed < 0:
+            self.killCutter()
+        else:
+            if self._cutterSpeed > 255:
+                self._cutterSpeed = 255
+            self._m4.setSpeed(self._cutterSpeed)
 
 
     def getCutter(self):
