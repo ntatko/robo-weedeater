@@ -66,7 +66,7 @@ class Sensors:
 
     def refreshData(self):
         try:
-            self._message, self._address = self._s.recvfrom(1024)
+            self._message, self._address = self._s.recvfrom(8192)
             self._data = self._message.split( "," )
 
             if ' 1' in self._data:
