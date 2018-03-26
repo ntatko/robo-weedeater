@@ -3,7 +3,7 @@ import socket, traceback, string
 from sys import stderr
 from numpy import arcsin
 
-def float(prepare(numbers):
+def prepare(numbers):
     while numbers[0] == ' ':
         numbers = numbers[1:]
     return numbers
