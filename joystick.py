@@ -19,6 +19,6 @@ while 1:
 		time.sleep(0.2)
 		mower.killCutter()
 	sensors.refreshData()
-	sensors.printStream()
+	print(sensors.get_compassHeading())
 	mower.drive(controller.get_leftX(), controller.get_leftY(), controller.get_rightX())
 	time.sleep(0.01)
