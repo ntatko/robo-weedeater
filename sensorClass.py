@@ -35,18 +35,25 @@ class Sensors:
             self._message, self._address = self._s.recvfrom(8192)
             self._data = self._message.split( "," )
 
-            ports = {1:[self._lastGPS, self._thisGPS], 3:[self._lastAccelerometer,
-                     self._thisAccelerometer], 4:[self._lastGyro, self._thisGyro],
-                     5:[self._lastCompass, self._thisCompass]}
-
             while self._originCompass == []:
-                for int(key), values in ports.items():
-                    if key in self._data:
-                        print("Getting " + str(key) + " from the list")
-                        values[0] = values[1]
-                        values[1] = [self._data[key + 1], self._data[key + 2], self._data[key + 3]]
-                        if key == 5:
-                            self._originCompass = values[1]
+                self._message, self._address = self._s.recvfrom(8192)
+                self._data = self._message.split( "," )
+                if 5 in self._data:
+                    self._lastCompass = self._thisCompass
+                    self._thisCompass = [self._data[self._data.index(5) + 1], self._data[self._data.index(5) + 2] self._data[self._data.index(5) + 3]]
+                    self._originCompass = Array(self._thisCompass)
+
+            if 1 in self._data:
+                self._lastGPS = self._thisGPS
+                self._thisGPS = [self._data[self._data.index(1) + 1], self._data[self._data.index(1) + 2] self._data[self._data.index(1) + 3]]
+
+            if 3 in self._data:
+                self._lastAccelerometer = self._thisAccelerometer
+                self._thisAccelerometer = [self._data[self._data.index(3) + 1], self._data[self._data.index(3) + 2] self._data[self._data.index(3) + 3]]
+
+            if 4 in self._data:
+                self._lastGyro = self._thisGyro
+                self._thisGyro = [self._data[self._data.index(4) + 1], self._data[self._data.index(4) + 2] self._data[self._data.index(4) + 3]]
 
         except (KeyboardInterrupt, SystemExit):
             raise
@@ -62,10 +69,21 @@ class Sensors:
                      self._thisAccelerometer], 4:[self._lastGyro, self._thisGyro],
                      5:[self._lastCompass, self._thisCompass]}
 
-            for key, values in ports.items():
-                if key in self._data:
-                    values[0] = values[1]
-                    values[1] = [self._data[key + 1], self._data[key + 2], self._data[key + 3]]
+        if 1 in self._data:
+            self._lastGPS = self._thisGPS
+            self._thisGPS = [self._data[self._data.index(1) + 1], self._data[self._data.index(1) + 2] self._data[self._data.index(1) + 3]]
+
+        if 3 in self._data:
+            self._lastAccelerometer = self._thisAccelerometer
+            self._thisAccelerometer = [self._data[self._data.index(3) + 1], self._data[self._data.index(3) + 2] self._data[self._data.index(3) + 3]]
+
+        if 4 in self._data:
+            self._lastGyro = self._thisGyro
+            self._thisGyro = [self._data[self._data.index(4) + 1], self._data[self._data.index(4) + 2] self._data[self._data.index(4) + 3]]
+
+        if 5 in self._data:
+            self._lastCompass = self._thisCompass
+            self._thisCompass = [self._data[self._data.index(5) + 1], self._data[self._data.index(5) + 2] self._data[self._data.index(5) + 3]]
 
         except (KeyboardInterrupt, SystemExit):
             raise
@@ -93,8 +111,6 @@ class Sensors:
     def get_compassHeading(self):
         while self._thisCompass == []:
             self.refreshData()
-            print("refreshing data...")
-        print("returning angle")
         return arcsin((self._originCompass[0]*self._thisCompass[0] + self._originCompass[1]*self._thisCompass[1] +
                 self._originCompass[2]*self._thisCompass[2])/(((self._originCompass[0]**2 +
                 self._originCompass[1]**2 + self._originCompass[2]**2)**0.5) * (self._thisCompass[0]**2 +

@@ -1,11 +1,11 @@
 import xbox
 import time
 import mowerClass
-#import sensorClass
+import sensorClass
 
 controller = xbox.Controller()
 mower = mowerClass.Mower()
-#sensors =  sensorClass.Sensors()
+sensors =  sensorClass.Sensors()
 
 while 1:
 	if controller.get_A():
@@ -18,5 +18,6 @@ while 1:
 	elif controller.get_start() and mower.getCutter() == 1:
 		time.sleep(0.2)
 		mower.killCutter()
+	sensors.printStream()
 	mower.drive(controller.get_leftX(), controller.get_leftY(), controller.get_rightX())
 	time.sleep(0.01)
