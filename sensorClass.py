@@ -111,7 +111,6 @@ class Sensors:
     def get_compassHeading(self):
         while self._thisCompass == []:
             self.refreshData()
-        print(str(self._thisCompass) + ", and " + str(self._originCompass))
         return math.degrees(arcsin((self._originCompass[0]*self._thisCompass[0] + self._originCompass[1]*self._thisCompass[1] +
                 self._originCompass[2]*self._thisCompass[2])/(((self._originCompass[0]**2 +
                 self._originCompass[1]**2 + self._originCompass[2]**2)**0.5) * (self._thisCompass[0]**2 +
