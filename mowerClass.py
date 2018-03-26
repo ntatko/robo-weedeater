@@ -99,7 +99,7 @@ class Mower(Kiwi_Bot):
     def spinCutter(self):
         #this code will start the cutter
         print("Motor has started") #debug
-        self.Kiwi_Bot.driveSlow()
+        self.driveSlow()
         self._m4.run(Adafruit_MotorHAT.FORWARD)
         self._cutterSpeed = 100
         self._cutter = 1
