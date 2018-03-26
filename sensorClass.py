@@ -32,8 +32,6 @@ class Sensors:
         self._s.bind((self._host, self._port))
 
         try:
-            self._message, self._address = self._s.recvfrom(8192)
-            self._data = self._message.split( "," )
 
             while self._originCompass == []:
                 self._message, self._address = self._s.recvfrom(8192)
@@ -41,7 +39,7 @@ class Sensors:
                 if 5 in self._data:
                     self._lastCompass = self._thisCompass
                     self._thisCompass = [self._data[self._data.index(5) + 1], self._data[self._data.index(5) + 2], self._data[self._data.index(5) + 3]]
-                    self._originCompass = Array(self._thisCompass)
+                    self._originCompass = self._thisCompass
 
             if 1 in self._data:
                 self._lastGPS = self._thisGPS
