@@ -36,22 +36,23 @@ class Sensors:
             while self._originCompass == []:
                 self._message, self._address = self._s.recvfrom(8192)
                 self._data = self._message.split( "," )
-                if 5 in self._data:
+                if ' 5' in self._data:
                     self._lastCompass = self._thisCompass
-                    self._thisCompass = [self._data[self._data.index(5) + 1], self._data[self._data.index(5) + 2], self._data[self._data.index(5) + 3]]
+                    self._thisCompass = [self._data[self._data.index(' 5') + 1], self._data[self._data.index(' 5') + 2], self._data[self._data.index(' 5') + 3]]
+		    print(str(self._thisCompass))
                     self._originCompass = self._thisCompass
 
-            if 1 in self._data:
+            if '  1' in self._data:
                 self._lastGPS = self._thisGPS
-                self._thisGPS = [self._data[self._data.index(1) + 1], self._data[self._data.index(1) + 2], self._data[self._data.index(1) + 3]]
+                self._thisGPS = [self._data[self._data.index(' 1') + 1], self._data[self._data.index(' 1') + 2], self._data[self._data.index(' 1') + 3]]
 
-            if 3 in self._data:
+            if ' 3' in self._data:
                 self._lastAccelerometer = self._thisAccelerometer
-                self._thisAccelerometer = [self._data[self._data.index(3) + 1], self._data[self._data.index(3) + 2], self._data[self._data.index(3) + 3]]
+                self._thisAccelerometer = [self._data[self._data.index(' 3') + 1], self._data[self._data.index(' 3') + 2], self._data[self._data.index(' 3') + 3]]
 
-            if 4 in self._data:
+            if ' 4' in self._data:
                 self._lastGyro = self._thisGyro
-                self._thisGyro = [self._data[self._data.index(4) + 1], self._data[self._data.index(4) + 2], self._data[self._data.index(4) + 3]]
+                self._thisGyro = [self._data[self._data.index(' 4') + 1], self._data[self._data.index(' 4') + 2], self._data[self._data.index(' 4') + 3]]
 
         except (KeyboardInterrupt, SystemExit):
             raise
@@ -63,21 +64,21 @@ class Sensors:
             self._message, self._address = self._s.recvfrom(8192)
             self._data = self._message.split( "," )
 
-            if 1 in self._data:
+            if ' 1' in self._data:
                 self._lastGPS = self._thisGPS
-                self._thisGPS = [self._data[self._data.index(1) + 1], self._data[self._data.index(1) + 2], self._data[self._data.index(1) + 3]]
+                self._thisGPS = [self._data[self._data.index(' 1') + 1], self._data[self._data.index(' 1') + 2], self._data[self._data.index(' 1') + 3]]
 
-            if 3 in self._data:
+            if ' 3' in self._data:
                 self._lastAccelerometer = self._thisAccelerometer
-                self._thisAccelerometer = [self._data[self._data.index(3) + 1], self._data[self._data.index(3) + 2], self._data[self._data.index(3) + 3]]
+                self._thisAccelerometer = [self._data[self._data.index(' 3') + 1], self._data[self._data.index(' 3') + 2], self._data[self._data.index(' 3') + 3]]
 
-            if 4 in self._data:
+            if ' 4' in self._data:
                 self._lastGyro = self._thisGyro
-                self._thisGyro = [self._data[self._data.index(4) + 1], self._data[self._data.index(4) + 2], self._data[self._data.index(4) + 3]]
+                self._thisGyro = [self._data[self._data.index(' 4') + 1], self._data[self._data.index(' 4') + 2], self._data[self._data.index(' 4') + 3]]
 
-            if 5 in self._data:
+            if ' 5' in self._data:
                 self._lastCompass = self._thisCompass
-                self._thisCompass = [self._data[self._data.index(5) + 1], self._data[self._data.index(5) + 2], self._data[self._data.index(5) + 3]]
+                self._thisCompass = [self._data[self._data.index(' 5') + 1], self._data[self._data.index(' 5') + 2], self._data[self._data.index(' 5') + 3]]
 
         except (KeyboardInterrupt, SystemExit):
             raise
