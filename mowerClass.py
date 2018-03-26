@@ -83,17 +83,32 @@ class Mower(Kiwi_Bot):
 
     def __init__(self):
         Kiwi_Bot.__init__(self)
+        self._m4 = self.mh.getMotor(4)
         self._cutter = 0
+        self._cutterSpeed = 0
 
     def killCutter(self):
         #this code would stop the cutter from spinning
         print("Motor is killed") #debug
+        self._m4.run(Adafruit_MotorHAT.RELEASE)
+        self._cutterSpeed = 0
+        Kiwi_Bot.driveFast()
+
         self._cutter = 0
 
     def spinCutter(self):
         #this code will start the cutter
         print("Motor has started") #debug
+        Kiwi_Bot.driveSlow()
+        self._m4.run(Adafruit_MotorHAT.FORWARD)
+        self._cutterSpeed = 100
         self._cutter = 1
+        self._m4.setSpeed(self._cutterSpeed)
+
+    def changeCutterSpeed(self, number):
+        self._cutterSpeed += number
+        self._m4.setSpeed(self._cutterSpeed)
+
 
     def getCutter(self):
         return self._cutter
