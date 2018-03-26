@@ -92,7 +92,8 @@ class Mower(Kiwi_Bot):
         print("Motor is killed") #debug
         self._m4.run(Adafruit_MotorHAT.RELEASE)
         self._cutterSpeed = 0
-        Kiwi_Bot.driveFast()
+        self._cutter = 0
+        self.driveFast()
 
         self._cutter = 0
 
