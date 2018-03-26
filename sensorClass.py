@@ -67,7 +67,7 @@ class Sensors:
 
             if 1 in self._data:
                 self._lastGPS = self._thisGPS
-                self._thisGPS = [self._data[self._data.index(1) + 1], self._data[self._data.index(1) + 2] self._data[self._data.index(1) + 3]]
+                self._thisGPS = [self._data[self._data.index(1) + 1], self._data[self._data.index(1) + 2], self._data[self._data.index(1) + 3]]
 
             if 3 in self._data:
                 self._lastAccelerometer = self._thisAccelerometer
