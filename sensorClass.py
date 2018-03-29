@@ -66,6 +66,7 @@ class Sensors:
 
     def refreshData(self):
         try:
+            self.refreshConnection()
             self._message, self._address = self._s.recvfrom(8192)
             self._data = self._message.split( "," )
 
@@ -89,6 +90,17 @@ class Sensors:
             raise
         except:
             traceback.print_exc()
+
+    def refreshConnection(self):
+        self._s.shutdown()
+        self._s.close()
+
+        self._host = ''
+        self._port = 5555
+        self._s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self._s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self._s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        self._s.bind((self._host, self._port))
 
     def get_compass(self):
         return self._thisCompass
